@@ -1,0 +1,74 @@
+{
+  "name": "@gigapipe/auth0-react",
+  "version": "1.0.0",
+  "description": "Internal library to use Auth0 in our frontend projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && tsup --dts-resolve",
+    "build:watch": "tsup --watch",
+    "check": "tsc -noEmit",
+    "lint": "eslint --cache src",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix --report-unused-disable-directives",
+      "prettier --write"
+    ],
+    "package.json": "sort-package-json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gigapipehq/auth0js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gigapipehq/auth0js/issues"
+  },
+  "homepage": "https://github.com/gigapipehq/auth0js#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@types/react": "^18.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "sort-package-json": "^1.57.0",
+    "tsup": "^6.2.3",
+    "typescript": "^4.8.3"
+  },
+  "peerDependencies": {
+    "react": "^16.11.0 || ^17 || ^18",
+    "react-dom": "^16.11.0 || ^17 || ^18"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "2.0.0-beta.0",
+    "zustand": "^4.1.1"
+  }
+}
