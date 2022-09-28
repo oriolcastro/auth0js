@@ -1,11 +1,12 @@
 import { User } from '@auth0/auth0-spa-js'
-import { useEffect, useRef } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 
 import { type AuthStore } from './authStore'
 import { type AppState } from './types'
 import { hasAuthParams } from './utils'
 
 export type AuthProviderOptions = {
+  children: ReactNode
   /**
    * By default this removes the code and state parameters from the url when you are redirected from the authorize page.
    * It uses `window.history` but you might want to overwrite this if you are using a custom router, like `react-router-dom`
@@ -49,7 +50,12 @@ const defaultOnRedirectCallback = (appState?: AppState): void => {
 }
 
 const AuthProvider = (opts: AuthProviderOptions) => {
-  const { skipRedirectCallback, onRedirectCallback = defaultOnRedirectCallback, authStore } = opts
+  const {
+    children,
+    skipRedirectCallback,
+    onRedirectCallback = defaultOnRedirectCallback,
+    authStore,
+  } = opts
   const { auth0Client, initialised, setError } = authStore.getState()
 
   const didInitialise = useRef(false)
@@ -77,7 +83,7 @@ const AuthProvider = (opts: AuthProviderOptions) => {
       }
     })()
   }, [auth0Client, initialised, onRedirectCallback, setError, skipRedirectCallback])
-  return null
+  return <>{children}</>
 }
 
 export default AuthProvider
