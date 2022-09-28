@@ -1,6 +1,6 @@
 import './App.css'
 
-import { loaderWithAuth, withAuthRequired } from '@gigapipe/auth0-react'
+import { AuthProvider, loaderWithAuth, withAuthRequired } from '@gigapipe/auth0-react'
 
 import { createBrowserRouter, json, LoaderFunctionArgs, RouterProvider } from 'react-router-dom'
 import { mountStoreDevtool } from 'simple-zustand-devtools'
@@ -52,7 +52,17 @@ if (import.meta.hot) {
 }
 
 function App() {
-  return <RouterProvider router={router} />
+  const onRedirectCallback = (appState: any) => {
+    // This is kind of a hack because the navigate method in the router object is private and not intended for public use.
+    // Currently this is the only way to wrap the RouterProvider with the AuthProvider and have a custom onRedirectCallback
+    router.navigate((appState && appState.returnTo) || window.location.pathname)
+  }
+
+  return (
+    <AuthProvider onRedirectCallback={onRedirectCallback} authStore={authStore}>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  )
 }
 
 export default App
