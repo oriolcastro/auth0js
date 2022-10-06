@@ -1,5 +1,5 @@
 {
-  "name": "@gigapipe/auth0-react",
+  "name": "@gigapipe/auth0js",
   "version": "1.0.0",
   "description": "Internal library to use Auth0 in our frontend projects",
   "main": "dist/index.js",
@@ -45,8 +45,8 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@types/react": "^18.0.21",
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -59,9 +59,9 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "sort-package-json": "^1.57.0",
+    "sort-package-json": "^2.0.0",
     "tsup": "^6.2.3",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "peerDependencies": {
     "react": "^16.11.0 || ^17 || ^18",
