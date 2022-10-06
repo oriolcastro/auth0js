@@ -1,6 +1,6 @@
 import './App.css'
 
-import { AuthProvider, withAuthRequired } from '@gigapipe/auth0-react'
+import { AuthProvider, withAuthRequired } from '@gigapipe/auth0js'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { mountStoreDevtool } from 'simple-zustand-devtools'

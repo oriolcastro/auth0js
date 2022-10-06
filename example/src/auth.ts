@@ -1,4 +1,4 @@
-import { createAuthStore, createAuthHook } from '@gigapipe/auth0-react'
+import { createAuthStore, createAuthHook } from '@gigapipe/auth0js'
 
 export const authStore = createAuthStore({
   domain: import.meta.env.VITE_AUTH0_DOMAIN,
