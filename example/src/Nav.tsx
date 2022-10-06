@@ -1,13 +1,18 @@
 import { useLocation, Link } from 'react-router-dom'
 
-import { useAuth } from './auth'
+import { authStore, useAuth } from './auth'
+
+const simulateAPIRequest = async () => {
+  const { getAccessTokenSilently } = authStore.getState()
+  const accessToken = await getAccessTokenSilently()
+  console.log('Here it is your access token: ', accessToken)
+}
 
 export function Nav() {
   const isAuthenticated = useAuth(state => state.isAuthenticated)
   const user = useAuth(state => state.user)
   const logout = useAuth(state => state.logout)
   const loginWithRedirect = useAuth(state => state.loginWithRedirect)
-  const getAccessTokenSilently = useAuth(state => state.getAccessTokenSilently)
 
   const { pathname } = useLocation()
 
@@ -49,15 +54,21 @@ export function Nav() {
           <button
             className="btn btn-outline-secondary"
             id="get-token"
-            onClick={() => getAccessTokenSilently().then(console.log).catch(console.log)}
+            onClick={() => simulateAPIRequest()}
           >
             get access token
           </button>
         </div>
       ) : (
-        <button className="btn btn-outline-success" id="login" onClick={() => loginWithRedirect()}>
-          login
-        </button>
+        <>
+          <button
+            className="btn btn-outline-success"
+            id="login"
+            onClick={() => loginWithRedirect()}
+          >
+            login
+          </button>
+        </>
       )}
     </nav>
   )
