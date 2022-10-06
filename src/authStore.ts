@@ -73,8 +73,8 @@ export const createAuthStore = (options: Auth0ClientOptions) =>
 
       try {
         token = await auth0Client.getTokenSilently(getTokenOptions)
-      } catch (error) {
-        throw tokenError(error as Error)
+      } catch (error: any) {
+        throw tokenError(error)
       } finally {
         const user = await auth0Client.getUser()
         set(state =>
