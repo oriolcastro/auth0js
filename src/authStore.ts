@@ -9,7 +9,7 @@ import {
 import { type StoreApi, type UseBoundStore, createStore } from 'zustand'
 
 import type { Auth0User, User } from './types'
-import { tokenError, transformSnakeObjectKeysToCamel } from './utils'
+import { defaultLogoutReturnTo, tokenError, transformSnakeObjectKeysToCamel } from './utils'
 
 type AuthState = {
   auth0Client: Auth0Client
@@ -65,7 +65,10 @@ export const createAuthStore = (options: Auth0ClientOptions) =>
     },
     logout: logoutOptions => {
       const { auth0Client } = get()
-      return auth0Client.logout(logoutOptions)
+      return auth0Client.logout({
+        ...logoutOptions,
+        logoutParams: { returnTo: defaultLogoutReturnTo, ...logoutOptions?.logoutParams },
+      })
     },
     getAccessTokenSilently: async getTokenOptions => {
       const { auth0Client } = get()

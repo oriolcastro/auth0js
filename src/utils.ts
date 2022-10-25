@@ -17,6 +17,7 @@ export const tokenError = normalizeErrorFn('Get access token failed')
 
 // For now we default to return the user to the root route after handling the redirect. At some point we could make it customizable.
 export const defaultReturnTo = '/'
+export const defaultLogoutReturnTo = `${window.location.origin}`
 
 export const snakeToCamelCase = (str: string): string =>
   str.replace(/([-_][a-z0-9])/gi, $1 => $1.toUpperCase().replace('_', ''))
