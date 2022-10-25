@@ -5,7 +5,7 @@ import { authStore, useAuth } from './auth'
 const simulateAPIRequest = async () => {
   const { getAccessTokenSilently } = authStore.getState()
   const accessToken = await getAccessTokenSilently()
-  console.log('Here it is your access token: ', accessToken)
+  console.log('Here is your access token: ', accessToken)
 }
 
 export function Nav() {
@@ -70,7 +70,7 @@ export function Nav() {
                 <p>Define VITE_AUTH0_ORG_ID in your .env.local file</p>
                 <button
                   className="btn btn-outline-success"
-                  id="login"
+                  id="login-org"
                   onClick={() =>
                     loginWithRedirect({
                       authorizationParams: { organization: import.meta.env.VITE_AUTH0_ORG_ID },
@@ -81,6 +81,22 @@ export function Nav() {
                 </button>
               </div>
             )}
+            <div className="column">
+              <p>Signup</p>
+              <button
+                className="btn btn-outline-success"
+                id="signup"
+                onClick={() =>
+                  loginWithRedirect({
+                    authorizationParams: {
+                      screen_hint: 'signup',
+                    },
+                  })
+                }
+              >
+                signup
+              </button>
+            </div>
           </>
         )}
       </div>
