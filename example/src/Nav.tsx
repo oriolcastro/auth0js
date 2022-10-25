@@ -17,9 +17,9 @@ export function Nav() {
   const { pathname } = useLocation()
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <span className="navbar-brand">@gigapipe/auth0js</span>
-      <div className="collapse navbar-collapse">
+    <nav>
+      <span>@gigapipe/auth0js</span>
+      <div>
         <div className="navbar-nav">
           <Link to="/" className={`nav-item nav-link${pathname === '/' ? ' active' : ''}`}>
             Home
@@ -38,32 +38,52 @@ export function Nav() {
           </Link>
         </div>
       </div>
-
-      {isAuthenticated ? (
-        <div>
-          <span id="hello">Hello, {user?.givenName}!</span>{' '}
-          <button className="btn btn-outline-secondary" id="logout" onClick={() => logout()}>
-            logout
-          </button>
-          <button
-            className="btn btn-outline-secondary"
-            id="get-token"
-            onClick={() => simulateAPIRequest()}
-          >
-            get access token
-          </button>
-        </div>
-      ) : (
-        <>
-          <button
-            className="btn btn-outline-success"
-            id="login"
-            onClick={() => loginWithRedirect()}
-          >
-            login
-          </button>
-        </>
-      )}
+      <div className="actions">
+        {isAuthenticated ? (
+          <>
+            <span id="hello">Hello, {user?.givenName}!</span>
+            <button className="btn btn-outline-secondary" id="logout" onClick={() => logout()}>
+              logout
+            </button>
+            <button
+              className="btn btn-outline-secondary"
+              id="get-token"
+              onClick={() => simulateAPIRequest()}
+            >
+              get access token
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="column">
+              <p>Login as an individual</p>
+              <button
+                className="btn btn-outline-success"
+                id="login"
+                onClick={() => loginWithRedirect()}
+              >
+                login
+              </button>
+            </div>
+            {import.meta.env.VITE_AUTH0_ORG_ID && (
+              <div className="column">
+                <p>Define VITE_AUTH0_ORG_ID in your .env.local file</p>
+                <button
+                  className="btn btn-outline-success"
+                  id="login"
+                  onClick={() =>
+                    loginWithRedirect({
+                      authorizationParams: { organization: import.meta.env.VITE_AUTH0_ORG_ID },
+                    })
+                  }
+                >
+                  login into organization
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </nav>
   )
 }
