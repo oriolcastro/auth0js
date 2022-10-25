@@ -26,6 +26,7 @@ var normalizeErrorFn = (fallbackMessage) => (error) => {
 };
 var tokenError = normalizeErrorFn("Get access token failed");
 var defaultReturnTo = "/";
+var defaultLogoutReturnTo = `${window.location.origin}`;
 var snakeToCamelCase = (str) => str.replace(/([-_][a-z0-9])/gi, ($1) => $1.toUpperCase().replace("_", ""));
 function transformSnakeObjectKeysToCamel(data) {
   return Object.fromEntries(
@@ -55,7 +56,10 @@ var createAuthStore = (options) => createStore()((set, get) => ({
   },
   logout: (logoutOptions) => {
     const { auth0Client } = get();
-    return auth0Client.logout(logoutOptions);
+    return auth0Client.logout({
+      ...logoutOptions,
+      logoutParams: { returnTo: defaultLogoutReturnTo, ...logoutOptions?.logoutParams }
+    });
   },
   getAccessTokenSilently: async (getTokenOptions) => {
     const { auth0Client } = get();
