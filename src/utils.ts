@@ -25,7 +25,7 @@ export const snakeToCamelCase = (str: string): string =>
 /**
  * Transform all object keys to camelCase including nested objects and arrays
  */
-export function transformSnakeObjectKeysToCamel<INPUT extends {}>(
+export function transformSnakeObjectKeysToCamel<INPUT extends object>(
   data: INPUT,
 ): CamelCasedProperties<INPUT> {
   return Object.fromEntries(

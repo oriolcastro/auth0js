@@ -156,8 +156,8 @@ export const createAuthStore = <TUser extends Auth0User = Auth0User>(options: Au
 
         try {
           token = await auth0Client.getTokenSilently(getTokenOptions)
-        } catch (error: any) {
-          throw tokenError(error)
+        } catch (error) {
+          throw tokenError(error as Error)
         } finally {
           const auth0User = await auth0Client.getUser<SnakeCasedProperties<TUser>>()
           if (auth0User) {

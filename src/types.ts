@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { type User } from '@auth0/auth0-spa-js'
 
 /**
@@ -7,6 +8,7 @@ export interface AppState {
   returnTo?: string
   isOrganizationLogin?: boolean
   isInviteLogin?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
@@ -22,11 +24,11 @@ export type CamelToSnakeCase<S extends string> = S extends `${infer T}${infer U}
  */
 export type SnakeCasedProperties<INPUT> = INPUT extends Function
   ? INPUT
-  : INPUT extends Array<infer U>
-  ? Array<SnakeCasedProperties<U>>
+  : INPUT extends (infer U)[]
+  ? SnakeCasedProperties<U>[]
   : INPUT extends Set<infer U>
   ? Set<SnakeCasedProperties<U>>
-  : // @ts-expect-error
+  : // @ts-expect-error: CamelToSnakeCase expects K to be a string but the type is infered to be a number or symbol too
     { [K in keyof INPUT as CamelToSnakeCase<K>]: SnakeCasedProperties<INPUT[K]> }
 
 /**
@@ -41,11 +43,11 @@ export type SnakeToCamelCase<S extends string> = S extends `${infer T}_${infer U
  */
 export type CamelCasedProperties<INPUT> = INPUT extends Function
   ? INPUT
-  : INPUT extends Array<infer U>
-  ? Array<CamelCasedProperties<U>>
+  : INPUT extends (infer U)[]
+  ? CamelCasedProperties<U>[]
   : INPUT extends Set<infer U>
   ? Set<CamelCasedProperties<U>>
-  : // @ts-expect-error
+  : // @ts-expect-error: CamelToSnakeCase expects K to be a string but the type is infered to be a number or symbol too
     { [K in keyof INPUT as SnakeToCamelCase<K>]: CamelCasedProperties<INPUT[K]> }
 
 /**

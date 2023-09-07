@@ -53,7 +53,7 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {},
+      typescript: true,
     },
     react: {
       version: 'detect',

@@ -5,12 +5,12 @@ import {
 import { createStore } from "zustand";
 
 // src/errors.ts
-var OAuthError = class extends Error {
+var OAuthError = class _OAuthError extends Error {
   constructor(error, error_description) {
-    super(error_description || error);
+    super(error_description ?? error);
     this.error = error;
     this.error_description = error_description;
-    Object.setPrototypeOf(this, OAuthError.prototype);
+    Object.setPrototypeOf(this, _OAuthError.prototype);
   }
 };
 
