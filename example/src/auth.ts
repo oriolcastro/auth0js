@@ -1,4 +1,4 @@
-import { createAuthStore, Auth0User } from '@gigapipe/auth0js'
+import { createAuthStore, type Auth0User } from 'auth0-react-router'
 import { useStore } from 'zustand'
 
 interface CustomUser extends Auth0User {
@@ -19,7 +19,7 @@ export const authStore = createAuthStore<CustomUser>({
 
 /**
  * Instead of exporting a hook with access to the entire store, requiring you to perform the state selection each time.
- * It is recomended to create all the custom hook you need that expose, and therefore subscribe the component, to an atomic part of the store.
+ * It is recommended to create all the custom hook you need that expose, and therefore subscribe the component, to an atomic part of the store.
  */
 export const useUser = () => useStore(authStore, state => state.user)
 export const useAuthenticated = () => useStore(authStore, state => state.isAuthenticated)

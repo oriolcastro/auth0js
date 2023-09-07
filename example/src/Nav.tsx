@@ -18,7 +18,7 @@ export function Nav() {
 
   return (
     <nav>
-      <span>@gigapipe/auth0js</span>
+      <span>auth0-react-router</span>
       <div>
         <div className="navbar-nav">
           <Link to="/" className={`nav-item nav-link${pathname === '/' ? ' active' : ''}`}>

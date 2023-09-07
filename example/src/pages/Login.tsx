@@ -1,4 +1,4 @@
-import { authorize } from '@gigapipe/auth0js'
+import { authorize } from 'auth0-react-router'
 import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { authStore } from '../auth'
 

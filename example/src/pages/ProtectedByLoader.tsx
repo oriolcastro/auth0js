@@ -1,6 +1,6 @@
 import { type LoaderFunctionArgs, json, useLoaderData } from 'react-router-dom'
 import { authStore } from '../auth'
-import { authorize } from '@gigapipe/auth0js'
+import { authorize } from 'auth0-react-router'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   console.log('Request object: ', request)

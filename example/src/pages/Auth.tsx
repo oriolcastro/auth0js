@@ -1,4 +1,4 @@
-import { handleRedirectCallback } from '@gigapipe/auth0js'
+import { handleRedirectCallback } from 'auth0-react-router'
 import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { authStore } from '../auth'
 
