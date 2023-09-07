@@ -16,6 +16,9 @@ interface AuthState<TUser extends Auth0User = Auth0User> {
    * Auth0 SDK for SPAs
    */
   auth0Client: Auth0Client
+  /**
+   * Flag to indicate if the library is initializing
+   */
   isLoading: boolean
   /**
    * Flag to indicate if the user is authenticated
@@ -33,7 +36,7 @@ interface AuthState<TUser extends Auth0User = Auth0User> {
    */
   user?: TUser
   /**
-   * Internal action DO NOT USE
+   * Internal actions DO NOT USE
    */
   _actions: {
     initialised: (user?: TUser) => void
@@ -57,7 +60,7 @@ interface AuthState<TUser extends Auth0User = Auth0User> {
      * await logout(options);
      * ```
      *
-     * Clears the application session and performs a redirect to the login route defind in Auth0
+     * Clears the application session and performs a redirect to the login route defined in Auth0
      *
      * */
     logout: (logoutOptions?: LogoutOptions) => Promise<null>
@@ -66,7 +69,7 @@ interface AuthState<TUser extends Auth0User = Auth0User> {
      * const accessToken = await getAccessTokenSilently(options);
      * ```
      *
-     * Fetches a new access token and return it
+     * Retrieves a new access token and return it
      * It also uses it to get an updated user and save it in the store
      */
     getAccessTokenSilently: (getTokenOptions?: GetTokenSilentlyOptions) => Promise<string>
@@ -95,7 +98,7 @@ interface AuthState<TUser extends Auth0User = Auth0User> {
 
 /**
  *  Function factory to create the Zustand store that contains all the state and the different auth methods.
- *  Use this store outside the React tree (ie. `const { isAuthenticated, loginWithRedirect } = authStore.getState()`) or if you only need access to its methods.
+ *  Use the created store outside the React tree (ie. `const { isAuthenticated, actions: { loginWithRedirect }} = authStore.getState()`) or if you only need access to its methods.
  * ```js
  * const authStore = createAuthStore<CustomUserType>({
  *  domain: import.meta.env.VITE_AUTH0_DOMAIN,
