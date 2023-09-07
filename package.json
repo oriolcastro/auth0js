@@ -1,10 +1,21 @@
 {
-  "name": "@gigapipe/auth0js",
+  "name": "auth0-react-router",
   "version": "1.0.0",
-  "description": "Internal library to use Auth0 in our frontend projects",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.mjs",
+  "description": "Library to use auth0-spa-sdk in React Router loaders and actions",
+  "homepage": "https://github.com/oriolcastro/auth0js#readme",
+  "bugs": {
+    "url": "https://github.com/oriolcastro/auth0js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oriolcastro/auth0js.git"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Oriol Castro Arnau",
+    "email": "uri@oriolcastro.me",
+    "url": "https://github.com/oriolcastro"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,6 +24,9 @@
     },
     "./package.json": "./package.json"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "src",
     "dist"
@@ -22,53 +36,46 @@
     "build:watch": "tsup --watch",
     "check": "tsc -noEmit",
     "lint": "eslint --cache src",
-    "prepare": "husky install"
+    "prepare": "is-ci || pnpm dlx simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged",
+    "commit-msg": "pnpm exec commitlint --edit"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --fix --report-unused-disable-directives",
       "prettier --write"
     ],
     "package.json": "sort-package-json"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gigapipehq/auth0js.git"
+  "dependencies": {
+    "@auth0/auth0-spa-js": "2.1.2",
+    "zustand": "4.4.1"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gigapipehq/auth0js/issues"
-  },
-  "homepage": "https://github.com/gigapipehq/auth0js#readme",
   "devDependencies": {
-    "@commitlint/cli": "^17.4.4",
-    "@commitlint/config-conventional": "^17.4.4",
-    "@types/react": "^18.0.28",
-    "@typescript-eslint/eslint-plugin": "^5.54.0",
-    "@typescript-eslint/parser": "^5.54.0",
-    "eslint": "^8.35.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-import-resolver-typescript": "^3.5.3",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.1.2",
-    "prettier": "^2.8.4",
-    "sort-package-json": "^2.4.1",
-    "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
+    "@commitlint/cli": "17.7.1",
+    "@commitlint/config-conventional": "17.7.0",
+    "@types/react": "18.2.21",
+    "@typescript-eslint/eslint-plugin": "6.6.0",
+    "@typescript-eslint/parser": "6.6.0",
+    "eslint": "8.48.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-import-resolver-typescript": "3.6.0",
+    "eslint-plugin-import": "2.28.1",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-simple-import-sort": "10.0.0",
+    "is-ci": "3.0.1",
+    "lint-staged": "14.0.1",
+    "prettier": "3.0.3",
+    "simple-git-hooks": "2.9.0",
+    "sort-package-json": "2.5.1",
+    "tsup": "7.2.0",
+    "typescript": "5.2.2"
   },
   "peerDependencies": {
     "react": "^16.11.0 || ^17 || ^18",
     "react-dom": "^16.11.0 || ^17 || ^18"
-  },
-  "dependencies": {
-    "@auth0/auth0-spa-js": "2.0.4",
-    "zustand": "4.3.5"
   }
 }
